@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Repositories\Interfaces\WeatherInterface;
 
 class WeatherController extends Controller
 {
+    protected $weatherRepository;
+
+    public function __construct(WeatherInterface $weatherRepository)
+    {
+        $this->weatherRepository = $weatherRepository;
+    }
+
     public function index()
     {
         return view('weather-dashboard');
@@ -14,15 +22,20 @@ class WeatherController extends Controller
     
     public function weather()
     {
-        $latitude = 14.5995;   // Manila lat
-        $longitude = 120.9842; // Manila lon
+        $latitude = 14.5995;
+        $longitude = 120.9842;
+        $location_name = "Manila";
 
-        $response = Http::get('https://api.open-meteo.com/v1/forecast', [
-            'latitude' => $latitude,
-            'longitude' => $longitude,
-            'current_weather' => true,
+        $currentWeather = $this->weatherRepository->getCurrentWeather($latitude, $longitude);
+        $sevenDaysForecast = $this->weatherRepository->getSevenDaysForecast($latitude, $longitude);
+        $twentyFourHrForecast = $this->weatherRepository->getTwentyFourHoursForecast($latitude, $longitude);
+        $locationDetails = $this->weatherRepository->getLocationDetails($location_name);
+
+        return response()->json([
+            'currentWeather' => $currentWeather,
+            'sevenDaysForecast' => $sevenDaysForecast,
+            'twentyFourHrForecast' => $twentyFourHrForecast,
+            'locationDetails' => $locationDetails
         ]);
-
-        return $response->json();
     }
 }
