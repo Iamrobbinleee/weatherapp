@@ -6,6 +6,7 @@
     <title>My Weather App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="{{ asset('css/weather.css') }}" rel="stylesheet">
 </head>
 <body class="bg-gradient-to-br from-blue-400 via-blue-300 to-indigo-500 min-h-screen p-4">
     <!-- Search Bar -->
@@ -172,47 +173,7 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Basic functionality placeholders
-        document.getElementById('searchBtn').addEventListener('click', function() {
-            const location = document.getElementById('locationInput').value;
-            if (location) {
-                // Fetch weather data for location (integrate with API like OpenWeatherMap)
-                console.log('Searching for:', location);
-                // Update UI with fetched data
-            }
-        });
-
-        document.getElementById('currentLocationBtn').addEventListener('click', function() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-                    console.log('Current location:', lat, lon);
-                    // Fetch weather data for coordinates
-                    // Update UI
-                }, function(error) {
-                    alert('Geolocation not supported or permission denied.');
-                });
-            } else {
-                alert('Geolocation not supported by this browser.');
-            }
-        });
-
-        // For unit toggle (optional enhancement): Add a button to switch between °C and °F
-        // This would require JS to update all temp elements dynamically
-    </script>
-
-    <style>
-        /* Hide scrollbar for horizontal scroll */
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-    </style>
+    
+<script src="{{ asset('js/weather.js') }}"></script>
 </body>
 </html>
