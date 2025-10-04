@@ -33,34 +33,35 @@
                 <div class="bg-white/20 backdrop-blur-lg rounded-3xl shadow-xl p-6 md:p-8 mb-6 text-white h-full">
                     <div class="flex flex-col md:flex-row items-center justify-between gap-4 h-full">
                         <div class="text-center md:text-left">
-                            <h1 class="text-3xl md:text-4xl font-bold mb-2">New York, NY</h1>
+                            <h1 class="text-3xl md:text-4xl font-bold mb-2" id="location-name"></h1>
                             <p class="text-lg opacity-90 mb-4">Sunny</p>
                             <div class="flex items-center justify-center md:justify-start gap-2 mb-4">
                                 <i class="fas fa-sun text-6xl md:text-7xl"></i>
                             </div>
-                            <p class="text-6xl md:text-8xl font-black">22°C <span class="text-4xl md:text-5xl">(72°F)</span></p>
-                            <p class="text-lg opacity-90">Feels like 21°C (70°F)</p>
+                            <p class="text-6xl md:text-8xl font-black" id="location-temp-value"></p>
+                            <span class="text-4xl md:text-5xl" id="location-fahr-value"></span>
+                            {{-- <p class="text-lg opacity-90">Feels like 21°C (70°F)</p> --}}
                         </div>
                         <div class="grid grid-cols-2 gap-4 text-sm md:text-base">
                             <div class="text-center md:text-left">
                                 <i class="fas fa-tint mb-1"></i>
                                 <div>Humidity</div>
-                                <div class="font-semibold">65%</div>
+                                <div class="font-semibold" id="location-hum-value"></div>
                             </div>
                             <div class="text-center md:text-left">
                                 <i class="fas fa-wind mb-1"></i>
                                 <div>Wind</div>
-                                <div class="font-semibold">10 mph</div>
+                                <div class="font-semibold" id="location-wind-value"></div>
                             </div>
                             <div class="text-center md:text-left">
                                 <i class="fas fa-eye mb-1"></i>
                                 <div>Visibility</div>
-                                <div class="font-semibold">10 km</div>
+                                <div class="font-semibold" id="location-vis-value"></div>
                             </div>
                             <div class="text-center md:text-left">
                                 <i class="fas fa-thermometer-half mb-1"></i>
                                 <div>Pressure</div>
-                                <div class="font-semibold">1013 hPa</div>
+                                <div class="font-semibold" id="location-press-value"></div>
                             </div>
                         </div>
                     </div>
@@ -173,7 +174,8 @@
             </div>
         </div>
     </div>
-    
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="{{ asset('js/weather.js') }}"></script>
 </body>
 </html>
