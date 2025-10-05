@@ -7,10 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const LOCATION_VIS_VALUE   = document.getElementById('location-vis-value');
     const LOCATION_PRESS_VALUE = document.getElementById('location-press-value');
     
-    let seven_days_forecast  = document.getElementById('seven-days-forecast');
-    let loader     = document.getElementById('loader');
-    let first_grid = document.getElementById('first-grid');
-    let sdf_loader = document.getElementById('sdf-loader');
+    let seven_days_forecast        = document.getElementById('seven-days-forecast');
+    let twentyfour_hours_forecast  = document.getElementById('twentyfour-hours-forecast');
+    let loader                     = document.getElementById('loader');
+    let first_grid                 = document.getElementById('first-grid');
+    let sdf_loader                 = document.getElementById('sdf-loader');
+    let tfh_loader                 = document.getElementById('tfh-loader');
 
     async function getWeatherData() {
         try {
@@ -20,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             loader.style.display = "none";
             sdf_loader.style.display = "none";
+            tfh_loader.style.display = "none";
             first_grid.style.display = "";
             
             const data = await response.json();
@@ -32,11 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
             LOCATION_PRESS_VALUE.textContent = data.currentWeather.current.pressure_msl + data.currentWeather.current_units.pressure_msl;
 
             sevenDaysForecast(data.sevenDaysForecast.daily);
+            twentyFourHours(data.twentyFourHrForecast.hourly);
             
             console.log(data);
         } catch (error) {
             loader.style.display = "";
             sdf_loader.style.display = "";
+            tfh_loader.style.display = "";
             first_grid.style.display = "none";
             console.error('Error fetching data:', error.message);
         }
@@ -61,6 +66,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
             seven_days_forecast.insertAdjacentHTML('beforeend', item);
+        });
+    }
+
+    function twentyFourHours(data){
+        const data_time = data.time;
+        const temps = data.temperature_2m;
+        const times = ['9:00 AM', '12:00 PM', '3:00 PM', '6:00 PM', '9:00 PM', '12:00 AM', '3:00 AM', '6:00 AM'];
+
+        twentyfour_hours_forecast.innerHTML = "";
+
+        times.forEach((time, i) => {
+            const item = `
+                <div class="bg-white/10 rounded-2xl p-4 min-w-[100px] text-center flex-shrink-0">
+                    <div class="text-sm opacity-90 mb-2">${time}</div>
+                    <i class="fas fa-sun text-2xl mb-2"></i>
+                    <div class="text-lg font-semibold">${temps[i]}°C (0°F)</div>
+                </div>
+            `;
+            twentyfour_hours_forecast.insertAdjacentHTML('beforeend', item);
         });
     }
 });

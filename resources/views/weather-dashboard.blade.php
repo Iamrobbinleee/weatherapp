@@ -91,56 +91,9 @@
                     <!-- Next 24 Hours Forecast -->
                     <div class="bg-white/20 backdrop-blur-lg rounded-3xl shadow-xl p-6 md:p-8">
                         <h2 class="text-2xl font-bold mb-6 text-center md:text-left">Next 24 Hours</h2>
-                        <div class="flex overflow-x-auto gap-4 pb-4 scrollbar-hide">
+                        <div class="ui active centered inline loader" id="tfh-loader"></div> {{-- Loader --}}
+                        <div class="flex overflow-x-auto gap-4 pb-4 scrollbar-hide grid grid-cols-2 md:grid-cols-8" id="twentyfour-hours-forecast">
                             <!-- Hour 1: 12 PM -->
-                            <div class="bg-white/10 rounded-2xl p-4 min-w-[100px] text-center flex-shrink-0">
-                                <div class="text-sm opacity-90 mb-2">12 PM</div>
-                                <i class="fas fa-sun text-2xl mb-2"></i>
-                                <div class="text-lg font-semibold">22°C (72°F)</div>
-                            </div>
-                            <!-- Hour 2: 3 PM -->
-                            <div class="bg-white/10 rounded-2xl p-4 min-w-[100px] text-center flex-shrink-0">
-                                <div class="text-sm opacity-90 mb-2">3 PM</div>
-                                <i class="fas fa-cloud-sun text-2xl mb-2"></i>
-                                <div class="text-lg font-semibold">24°C (75°F)</div>
-                            </div>
-                            <!-- Hour 3: 6 PM -->
-                            <div class="bg-white/10 rounded-2xl p-4 min-w-[100px] text-center flex-shrink-0">
-                                <div class="text-sm opacity-90 mb-2">6 PM</div>
-                                <i class="fas fa-cloud text-2xl mb-2"></i>
-                                <div class="text-lg font-semibold">20°C (68°F)</div>
-                            </div>
-                            <!-- Hour 4: 9 PM -->
-                            <div class="bg-white/10 rounded-2xl p-4 min-w-[100px] text-center flex-shrink-0">
-                                <div class="text-sm opacity-90 mb-2">9 PM</div>
-                                <i class="fas fa-moon text-2xl mb-2"></i>
-                                <div class="text-lg font-semibold">18°C (64°F)</div>
-                            </div>
-                            <!-- Hour 5: 12 AM -->
-                            <div class="bg-white/10 rounded-2xl p-4 min-w-[100px] text-center flex-shrink-0">
-                                <div class="text-sm opacity-90 mb-2">12 AM</div>
-                                <i class="fas fa-cloud-moon text-2xl mb-2"></i>
-                                <div class="text-lg font-semibold">16°C (61°F)</div>
-                            </div>
-                            <!-- Hour 6: 3 AM -->
-                            <div class="bg-white/10 rounded-2xl p-4 min-w-[100px] text-center flex-shrink-0">
-                                <div class="text-sm opacity-90 mb-2">3 AM</div>
-                                <i class="fas fa-cloud-moon-rain text-2xl mb-2"></i>
-                                <div class="text-lg font-semibold">15°C (59°F)</div>
-                            </div>
-                            <!-- Hour 7: 6 AM -->
-                            <div class="bg-white/10 rounded-2xl p-4 min-w-[100px] text-center flex-shrink-0">
-                                <div class="text-sm opacity-90 mb-2">6 AM</div>
-                                <i class="fas fa-sunrise text-2xl mb-2"></i>
-                                <div class="text-lg font-semibold">17°C (63°F)</div>
-                            </div>
-                            <!-- Hour 8: 9 AM -->
-                            <div class="bg-white/10 rounded-2xl p-4 min-w-[100px] text-center flex-shrink-0">
-                                <div class="text-sm opacity-90 mb-2">9 AM</div>
-                                <i class="fas fa-cloud-sun-rain text-2xl mb-2"></i>
-                                <div class="text-lg font-semibold">19°C (66°F)</div>
-                            </div>
-                            <!-- Add more hours as needed for full 24h coverage -->
                         </div>
                     </div>
                 </div>
