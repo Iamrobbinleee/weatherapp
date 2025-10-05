@@ -32,6 +32,7 @@
             <div class="md:col-span-1 p-4 rounded-lg">
                 <!-- Current Weather Card -->
                 <div class="bg-white/20 backdrop-blur-lg rounded-3xl shadow-xl p-6 md:p-8 mb-6 text-white h-full">
+                    <h2 class="text-2xl font-bold mb-6 text-center md:text-left">Current Weather</h2>
                     <div class="flex flex-col md:flex-row items-center justify-between gap-4 h-full" id="loader">
                         <div class="ui active centered inline loader"></div> {{-- Loader --}}
                     </div>
@@ -78,43 +79,10 @@
                 <div class="p-4 rounded-lg">
                     <!-- 5-Day Forecast -->
                     <div class="bg-white/20 backdrop-blur-lg rounded-3xl shadow-xl p-6 md:p-8 mb-6">
-                        <h2 class="text-2xl font-bold mb-6 text-center md:text-left">5-Day Forecast</h2>
-                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-                            <!-- Day 1 -->
-                            <div class="bg-white/10 rounded-2xl p-4 text-center">
-                                <div class="text-sm opacity-90 mb-2">Mon</div>
-                                <i class="fas fa-cloud-sun text-3xl mb-2"></i>
-                                <div class="text-xl font-semibold">24°C (75°F)</div>
-                                <div class="text-sm opacity-90">-8°C (18°F)</div>
-                            </div>
-                            <!-- Day 2 -->
-                            <div class="bg-white/10 rounded-2xl p-4 text-center">
-                                <div class="text-sm opacity-90 mb-2">Tue</div>
-                                <i class="fas fa-cloud-rain text-3xl mb-2"></i>
-                                <div class="text-xl font-semibold">20°C (68°F)</div>
-                                <div class="text-sm opacity-90">-9°C (15°F)</div>
-                            </div>
-                            <!-- Day 3 -->
-                            <div class="bg-white/10 rounded-2xl p-4 text-center">
-                                <div class="text-sm opacity-90 mb-2">Wed</div>
-                                <i class="fas fa-sun text-3xl mb-2"></i>
-                                <div class="text-xl font-semibold">27°C (80°F)</div>
-                                <div class="text-sm opacity-90">-7°C (20°F)</div>
-                            </div>
-                            <!-- Day 4 -->
-                            <div class="bg-white/10 rounded-2xl p-4 text-center">
-                                <div class="text-sm opacity-90 mb-2">Thu</div>
-                                <i class="fas fa-cloud-showers-heavy text-3xl mb-2"></i>
-                                <div class="text-xl font-semibold">18°C (65°F)</div>
-                                <div class="text-sm opacity-90">-11°C (12°F)</div>
-                            </div>
-                            <!-- Day 5 -->
-                            <div class="bg-white/10 rounded-2xl p-4 text-center">
-                                <div class="text-sm opacity-90 mb-2">Fri</div>
-                                <i class="fas fa-bolt text-3xl mb-2"></i>
-                                <div class="text-xl font-semibold">22°C (72°F)</div>
-                                <div class="text-sm opacity-90">-9°C (16°F)</div>
-                            </div>
+                        <h2 class="text-2xl font-bold mb-6 text-center md:text-left">7-Day Forecast</h2>
+                        <div class="ui active centered inline loader" id="sdf-loader"></div> {{-- Loader --}}
+                        <div class="grid grid-cols-2 md:grid-cols-7 gap-4" id="seven-days-forecast">
+                            <!-- Per Day -->
                         </div>
                     </div>
                 </div>

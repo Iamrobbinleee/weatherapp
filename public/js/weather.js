@@ -7,8 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const LOCATION_VIS_VALUE   = document.getElementById('location-vis-value');
     const LOCATION_PRESS_VALUE = document.getElementById('location-press-value');
     
+    let seven_days_forecast  = document.getElementById('seven-days-forecast');
     let loader     = document.getElementById('loader');
     let first_grid = document.getElementById('first-grid');
+    let sdf_loader = document.getElementById('sdf-loader');
 
     async function getWeatherData() {
         try {
@@ -17,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             throw new Error(`HTTP error! Status: ${response.status}`);
             }
             loader.style.display = "none";
+            sdf_loader.style.display = "none";
             first_grid.style.display = "";
             
             const data = await response.json();
@@ -27,15 +30,38 @@ document.addEventListener('DOMContentLoaded', () => {
             LOCATION_WIND_VALUE.textContent = data.currentWeather.current.wind_speed_10m + data.currentWeather.current_units.wind_speed_10m;
             LOCATION_VIS_VALUE.textContent = data.currentWeather.current.visibility + data.currentWeather.current_units.visibility;
             LOCATION_PRESS_VALUE.textContent = data.currentWeather.current.pressure_msl + data.currentWeather.current_units.pressure_msl;
+
+            sevenDaysForecast(data.sevenDaysForecast.daily);
             
             console.log(data);
         } catch (error) {
             loader.style.display = "";
+            sdf_loader.style.display = "";
             first_grid.style.display = "none";
             console.error('Error fetching data:', error.message);
         }
     }
-getWeatherData();
+    getWeatherData();
+
+    function sevenDaysForecast(data){
+        const times = data.time;
+        const maxTemps = data.temperature_2m_max;
+        const minTemps = data.temperature_2m_min;
+
+        seven_days_forecast.innerHTML = "";
+
+        times.forEach((day, i) => {
+            const item = `
+                <div class="bg-white/10 rounded-2xl p-4 text-center">
+                    <div class="text-sm opacity-90 mb-2">${day}</div>
+                    <i class="fas fa-cloud-sun text-3xl mb-2"></i>
+                    <div class="text-xl font-semibold">${maxTemps[i]}°C (0°F)</div>
+                    <div class="text-sm opacity-90">${minTemps[i]}°C (0°F)</div>
+                </div>
+            `;
+            seven_days_forecast.insertAdjacentHTML('beforeend', item);
+        });
+    }
 });
 
 document.getElementById('searchBtn').addEventListener('click', function() {
