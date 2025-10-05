@@ -47,10 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const times = data.time;
         const maxTemps = data.temperature_2m_max;
         const minTemps = data.temperature_2m_min;
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
         seven_days_forecast.innerHTML = "";
 
-        times.forEach((day, i) => {
+        days.forEach((day, i) => {
             const item = `
                 <div class="bg-white/10 rounded-2xl p-4 text-center">
                     <div class="text-sm opacity-90 mb-2">${day}</div>
