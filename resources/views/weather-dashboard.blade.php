@@ -6,6 +6,7 @@
     <title>My Weather App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" rel="stylesheet">
     <link href="{{ asset('css/weather.css') }}" rel="stylesheet">
 </head>
 <body class="bg-gradient-to-br from-blue-400 via-blue-300 to-indigo-500 min-h-screen p-4">
@@ -31,7 +32,11 @@
             <div class="md:col-span-1 p-4 rounded-lg">
                 <!-- Current Weather Card -->
                 <div class="bg-white/20 backdrop-blur-lg rounded-3xl shadow-xl p-6 md:p-8 mb-6 text-white h-full">
-                    <div class="flex flex-col md:flex-row items-center justify-between gap-4 h-full">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4 h-full" id="loader">
+                        <div class="ui active centered inline loader"></div> {{-- Loader --}}
+                    </div>
+                    {{-- 1st Grid (Current Location Weather) --}}
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4 h-full" id="first-grid" style="display: none;">
                         <div class="text-center md:text-left">
                             <h1 class="text-3xl md:text-4xl font-bold mb-2" id="location-name"></h1>
                             <p class="text-lg opacity-90 mb-4">Sunny</p>
@@ -176,6 +181,8 @@
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 <script src="{{ asset('js/weather.js') }}"></script>
 </body>
 </html>

@@ -1,11 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const LOCATION_NAME = document.getElementById('location-name');
-    const LOCATION_TEMP_VALUE = document.getElementById('location-temp-value');
-    const LOCATION_FAHR_VALUE = document.getElementById('location-fahr-value');
-    const LOCATION_HUM_VALUE= document.getElementById('location-hum-value');
-    const LOCATION_WIND_VALUE= document.getElementById('location-wind-value');
-    const LOCATION_VIS_VALUE= document.getElementById('location-vis-value');
-    const LOCATION_PRESS_VALUE= document.getElementById('location-press-value');
+    const LOCATION_NAME        = document.getElementById('location-name');
+    const LOCATION_TEMP_VALUE  = document.getElementById('location-temp-value');
+    const LOCATION_FAHR_VALUE  = document.getElementById('location-fahr-value');
+    const LOCATION_HUM_VALUE   = document.getElementById('location-hum-value');
+    const LOCATION_WIND_VALUE  = document.getElementById('location-wind-value');
+    const LOCATION_VIS_VALUE   = document.getElementById('location-vis-value');
+    const LOCATION_PRESS_VALUE = document.getElementById('location-press-value');
+    
+    let loader     = document.getElementById('loader');
+    let first_grid = document.getElementById('first-grid');
 
     async function getWeatherData() {
         try {
@@ -13,6 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
             }
+            loader.style.display = "none";
+            first_grid.style.display = "";
+            
             const data = await response.json();
             LOCATION_NAME.textContent = data.locationDetails.results[0].name;
             LOCATION_TEMP_VALUE.textContent = data.currentWeather.current.temperature_2m + data.currentWeather.current_units.temperature_2m;
@@ -24,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             console.log(data);
         } catch (error) {
+            loader.style.display = "";
+            first_grid.style.display = "none";
             console.error('Error fetching data:', error.message);
         }
     }
