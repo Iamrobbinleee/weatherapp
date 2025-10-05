@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             first_grid.style.display = "";
             
             const data = await response.json();
-            LOCATION_NAME.textContent = data.locationDetails.results[0].name;
+            LOCATION_NAME.textContent = `${data.locationDetails.results[0].name}, ${data.locationDetails.results[0].country}`;
             LOCATION_TEMP_VALUE.textContent = data.currentWeather.current.temperature_2m + data.currentWeather.current_units.temperature_2m;
             LOCATION_FAHR_VALUE.textContent = "(72°F)";
             LOCATION_HUM_VALUE.textContent = data.currentWeather.current.relative_humidity_2m + data.currentWeather.current_units.relative_humidity_2m;
