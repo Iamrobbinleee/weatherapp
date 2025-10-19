@@ -38,4 +38,23 @@ class WeatherController extends Controller
             'locationDetails' => $locationDetails
         ]);
     }
+
+    public function myCurrentLocation(Request $request)
+    {
+        $latitude = $request->latitude;
+        $longitude = $request->longitude;
+        $location_name = "Batangas"; //Need to set to Dynamic
+
+        $currentWeather = $this->weatherRepository->getCurrentWeather($latitude, $longitude);
+        $sevenDaysForecast = $this->weatherRepository->getSevenDaysForecast($latitude, $longitude);
+        $twentyFourHrForecast = $this->weatherRepository->getTwentyFourHoursForecast($latitude, $longitude);
+        $locationDetails = $this->weatherRepository->getLocationDetails($location_name);
+
+        return response()->json([
+            'currentWeather' => $currentWeather,
+            'sevenDaysForecast' => $sevenDaysForecast,
+            'twentyFourHrForecast' => $twentyFourHrForecast,
+            'locationDetails' => $locationDetails
+        ]);
+    }
 }

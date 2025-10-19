@@ -87,25 +87,76 @@ document.addEventListener('DOMContentLoaded', () => {
             twentyfour_hours_forecast.insertAdjacentHTML('beforeend', item);
         });
     }
-});
 
-document.getElementById('searchBtn').addEventListener('click', function() {
-    const location = document.getElementById('locationInput').value;
-    if (location) {
-        console.log('Searching for:', location);
-    }
-});
-
-document.getElementById('currentLocationBtn').addEventListener('click', function() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            console.log('Current location:', lat, lon);
-        }, function(error) {
-            alert('Geolocation not supported or permission denied.');
+    function searchLocation(){
+        document.getElementById('searchBtn').addEventListener('click', function() {
+        const location = document.getElementById('locationInput').value;
+            if (location) {
+                console.log('Searching for:', location);
+            }
         });
-    } else {
-        alert('Geolocation not supported by this browser.');
     }
+    searchLocation();
+
+    async function useCurrentLocation(){
+        document.getElementById('currentLocationBtn').addEventListener('click', async function() {
+            loader.style.display = "";
+            sdf_loader.style.display = "";
+            tfh_loader.style.display = "";
+            first_grid.style.display = "none";
+            seven_days_forecast.style.display = "none";
+            twentyfour_hours_forecast.style.display = "none";
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+
+                    const locationData = {
+                        latitude: lat,
+                        longitude: lon
+                    };
+
+                    try {
+                        const response = await axios.post('https://weatherapp.proj/my-current-location', locationData);
+                        loader.style.display = "none";
+                        sdf_loader.style.display = "none";
+                        tfh_loader.style.display = "none";
+                        first_grid.style.display = "";
+                        seven_days_forecast.style.display = "";
+                        twentyfour_hours_forecast.style.display = "";
+
+                        const data = response.data;
+                        LOCATION_NAME.textContent = `${data.locationDetails.results[0].name}, ${data.locationDetails.results[0].country}`;
+                        LOCATION_TEMP_VALUE.textContent = data.currentWeather.current.temperature_2m + data.currentWeather.current_units.temperature_2m;
+                        LOCATION_FAHR_VALUE.textContent = "(72°F)";
+                        LOCATION_HUM_VALUE.textContent = data.currentWeather.current.relative_humidity_2m + data.currentWeather.current_units.relative_humidity_2m;
+                        LOCATION_WIND_VALUE.textContent = data.currentWeather.current.wind_speed_10m + data.currentWeather.current_units.wind_speed_10m;
+                        LOCATION_VIS_VALUE.textContent = data.currentWeather.current.visibility + data.currentWeather.current_units.visibility;
+                        LOCATION_PRESS_VALUE.textContent = data.currentWeather.current.pressure_msl + data.currentWeather.current_units.pressure_msl;
+
+                        sevenDaysForecast(data.sevenDaysForecast.daily);
+                        twentyFourHours(data.twentyFourHrForecast.hourly);
+                        
+                        console.log('Use my current location: ', response.data);
+                    } catch (error) {
+                        loader.style.display = "";
+                        sdf_loader.style.display = "";
+                        tfh_loader.style.display = "";
+                        first_grid.style.display = "none";
+                        seven_days_forecast.style.display = "none";
+                        twentyfour_hours_forecast.style.display = "none";
+                        
+                        console.error(error);
+                    }
+                    console.log('Use my Current location:', lat, lon);
+                }, function(error) {
+                    console.log('Geolocation not supported or permission denied.', error);
+                });
+            } else {
+                console.log('Geolocation not supported by this browser.');
+            }
+        });
+    }
+    useCurrentLocation();
 });

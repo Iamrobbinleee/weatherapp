@@ -8,3 +8,4 @@ Route::get('/', function () {
 });
 
 Route::get('/weather-dashboard', [WeatherController::class, 'index']);
+Route::post('/my-current-location', [WeatherController::class, 'myCurrentLocation']);
